@@ -1,0 +1,2 @@
+echo devmem 0x1d020${1} 32 0x${2}
+devmem 0x1d020${1} 32 0x${2} ; devmem 0x1d020${1}

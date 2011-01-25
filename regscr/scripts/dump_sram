@@ -1,0 +1,20 @@
+#!/usr/bin/regscr
+##
+# Dump DM365 Internal Ram0
+##
+
+# a read and a write
+read   DM365_SRAM0 0            First_word_from_SRAM0
+#write DM365_SRAM0 4 0x41424344 Second_word_from_SRAM0
+
+#
+print "dm365 ram0 bank"
+dump DM365_SRAM0 0 0x100  First_256_words
+
+# sleep
+sleep 100
+
+#
+print ""
+dump DM365_SRAM0 0x100 0x100 Next_256_words
+

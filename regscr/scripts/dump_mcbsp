@@ -1,0 +1,25 @@
+#!/usr/bin/regscr
+##
+#  Dump DM365 McBSP registers
+##
+
+PRINT "DM365 McBSP registers"
+
+READ DM365_MCBSP  MB_ddr      "DDR"
+READ DM365_MCBSP  MB_dxr      "DXR"
+READ DM365_MCBSP  MB_spcr     "SPCR"
+READ DM365_MCBSP  MB_rcr      "RCR"
+READ DM365_MCBSP  MB_xcr      "XCR"
+READ DM365_MCBSP  MB_srgr     "SRGR"
+READ DM365_MCBSP  MB_mcr      "MCR"
+READ DM365_MCBSP  MB_pcr      "PCR"
+READ DM365_MCBSP  MB_rcere0   "RCERE0"   
+READ DM365_MCBSP  MB_xcere0   "XCERE0"   
+READ DM365_MCBSP  MB_rcere1   "RCERE1"   
+READ DM365_MCBSP  MB_xcere1   "XCERE1"   
+READ DM365_MCBSP  MB_rcere2   "RCERE2"   
+READ DM365_MCBSP  MB_xcere2   "XCERE2"   
+READ DM365_MCBSP  MB_rcere3   "RCERE3"   
+READ DM365_MCBSP  MB_xcere3   "XCERE3"   
+
+

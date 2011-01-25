@@ -1,0 +1,19 @@
+#!/usr/bin/regscr
+##
+#  Dump DM365 McBSP registers
+##
+
+PRINT "DM365 McBSP - fix L/R clocks, PinMux0"
+
+###  SET GPIO - CLKX/GPIO48, FSX/GPIO47 to McBSP
+#
+#WRITE DM365_SYS   SY_PINMUX0  0x009ec000  "WR:_Pinmux0_-_GPIO47/48"
+WRITE  DM365_SYS   SY_PINMUX0  0x00fec000  "WR:_Pinmux0_-_CLKX/FSX_McBSP"
+sleep 1
+READ   DM365_SYS   SY_PINMUX0              "RB:_Pinmux0"
+
+### Turn off Audio Codec Mastering
+## commented out
+#SY i2c_io 11 1/01
+
+
