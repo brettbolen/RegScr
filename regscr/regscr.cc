@@ -15,6 +15,12 @@
 
 #define VERSION "v1.1"
 
+// todo:
+//   change from scanf to strtok_r for cmd parsing.
+//      accept commas and spaces
+//   research whole line for "xx" or '..', print it out.
+
+
 using namespace std;
 
 // data
