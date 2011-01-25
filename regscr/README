@@ -1,0 +1,12 @@
+This application parses scripts and updates registers based on 
+symbolic names.  A 'dictionary' file is read at startup containg
+names of base addresses and offsets.  The script parses commands
+such as 'Read', 'Write', 'Dump', and 'Print'.  When Reading
+and Writing to Memory, the command takes the following form:
+
+	Read	DEVICE_ADDR   OFFSET
+or
+	Write   DEVICE_ADDR   OFFSET  VALUE
+
+
+
