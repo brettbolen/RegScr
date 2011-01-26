@@ -28,3 +28,26 @@ SY_PINMUX4  0x10
 
 Here is an example script:
 
+//--------------------------------------
+$ cat example.scr
+#!/usr/bin/regscr
+###########################################
+## Example Register Script executable file
+###########################################
+// another comment
+
+print "example_script"
+
+print "internal_ram"
+dump  DM365_SRAM0 0 0x100
+
+print "pinmux"
+read  DM365_SYS SYS_PINMUX0    
+write DM365_SYS SYS_PINMUX0  0xffff0fe1
+
+sleep 100     // 100 microsconds
+
+print "Symbol_Table"
+table
+
+//--------------------------------------
