@@ -63,22 +63,23 @@ void parse_regs(const char *fname)
 /*******************************
  * print register dictionary
  */
-void print_regs()
+void print_regs( void)
 {
     char line[255];
     for( map<string,unsigned long long int>::iterator ii=registers.begin();
 	 ii!=registers.end();
 	 ++ii)
     {
-	    printf("0x%llx => register['%s']\n", (*ii).second,
-		   (*ii).first.c_str());
+	printf("0x%llx => register['%s']\n", (*ii).second,
+	       (*ii).first.c_str());
     }
 }
 
 /*******************************
  *
  */
-unsigned long long lookup_register( char * arg) {
+unsigned long long lookup_register( char * arg)
+{
     unsigned long long val = 0;
     if ( registers.find(arg) == registers.end()) {
 	val  = strtoll(arg, NULL, 0);
@@ -96,7 +97,8 @@ unsigned long long lookup_register( char * arg) {
 /*******************************
  *
  */
-int open_regs() {
+int open_regs(void )
+{
     int rc = 0;
     reg_fd = open("/dev/mem", O_RDWR);
     if (reg_fd == -1) {
@@ -115,7 +117,7 @@ int open_regs() {
     //printf("open_regs: pagesize is 0x%llx ( %ld), vmap_size=0x%llx\n",
     //       psz, psz,
     //       vmap_size);
- exit:
+exit:
     return rc;
    
 }
@@ -123,7 +125,8 @@ int open_regs() {
 /*******************************
  *
  */
-int close_regs() {
+int close_regs()
+{
     if (vmap_ptr) {
 	munmap(vmap_ptr, vmap_size);
     }
@@ -167,7 +170,7 @@ void map_regs( unsigned long long reg_addr)
 	 
 	}
     }
- exit:
+exit:
     return;
 }
 
@@ -237,7 +240,7 @@ int   write_register(unsigned long long  reg_base,
 #endif
    
 	       
- exit:
+exit:
     return rc;
 }
 
@@ -249,21 +252,25 @@ int   write_register(unsigned long long  reg_base,
 int parse_cmds(char *fname)
 {
     string line;
-    int    line_no = 0;
-    char   cmd[255];
-    char   arg0[255];
-    char   arg1[255];
-    char   arg2[255];
-    char   arg3[255];
-    char   arg4[255];
     uint32_t val = 0;
     ifstream datfile(fname, ios::in);
-    if (datfile.is_open()) {
-	while (!datfile.eof()) {
+    if (datfile.is_open())
+    {
+	int    line_no = 0;
+	char   cstring[255];
+	char   cmd[255];
+	char   arg0[255];
+	char   arg1[255];
+	char   arg2[255];
+	char   arg3[255];
+	char   arg4[255];
+      
+	while (!datfile.eof())
+	{
 	    getline( datfile, line);
 	    line_no ++;
 	    cmd[0] = arg0[0] = arg1[0] = arg2[0] = arg3[0] =
-		arg4[0] = 0;
+		    arg4[0] = 0;
 
 	    // todo - fix tokenizer using strtok_r -- great example on man page
 	    //char   c_line[255];
@@ -272,6 +279,8 @@ int parse_cmds(char *fname)
 	    //sprintf(c_line, "%s",line.c_str());
 	    //c_line_p = c_line;
 	    //c_line_cmd = strtok(c_line_p, " ");
+
+	    sprintf( cstring, "%s", line.c_str());
 	    
 
 	    //                     c  0  1  2  3
@@ -364,7 +373,7 @@ int parse_cmds(char *fname)
 		char sys_cmd[255];
 		char read_line[255];
 		char *lp = read_line;
-		sprintf(read_line, line.c_str());
+		sprintf(read_line, "%s", line.c_str());
 		lp+=2;  // skip two chars;
 		printf("system cmd: '%s'\n", lp);
 		system(lp);
@@ -412,12 +421,13 @@ int parse_cmds(char *fname)
 			if ((i % 16) == 0) {
 			    unsigned int v1 = i+ofs;
 			    printf("  0x%04lx_%04lx: ",
-				   (v1 >> 16), (v1 & 0xffff));
+				   (long int) (v1 >> 16),
+				   (long int) (v1 & 0xffff));
 			}
 			// data
 			printf("%04lx_%04lx ",
-			       (vals[i/4] >> 16),
-			       (vals[i/4] & 0xffff));
+			       (long int) (vals[i/4] >> 16),
+			       (long int) (vals[i/4] & 0xffff));
 
 			// ascii data  todo:
 			    
@@ -507,6 +517,6 @@ int main(int argc, char *argv[])
     close_regs();
 
 
- exit:
+exit:
     return rc;
 }

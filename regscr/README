@@ -1,18 +1,30 @@
 This application parses scripts and updates registers based on 
-symbolic names.  A 'dictionary' file is read at startup containg
-names of base addresses and offsets.  The script parses commands
-such as 'Read', 'Write', 'Dump', and 'Print'.  When Reading
-and Writing to Memory, the command takes the following form:
+symbolic names.
 
-	Read	DEVICE_ADDR   OFFSET
-or
-	Write   DEVICE_ADDR   OFFSET  VALUE
+A 'dictionary' file is read at startup containg names of base
+addresses and offsets.  The script parses commands
+such as 'Read', 'Write', 'Dump', and 'Print'.
 
+Here is an example dictionary file:
 
-todo:
-	redo parsing, add commas, 
+//-----------------
+$ cat regscr.dat
+# Register base & offset addresses
 
-this is master branch.
-This is newfeature.
+DM365_SRAM0  0x10000     # base address
+DM365_SRAM1  0x14000     # base address
+DM365_ROM0   0x18000     # base address
 
+# sys
+DM365_SYS   0x1c40000
+
+SY_PINMUX0  0x0
+SY_PINMUX1  0x4
+SY_PINMUX2  0x8
+SY_PINMUX3  0xc
+SY_PINMUX4  0x10
+
+//------------------
+
+Here is an example script:
 
