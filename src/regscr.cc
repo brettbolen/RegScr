@@ -152,9 +152,6 @@ void map_regs( unsigned long long reg_addr)
 	if (vmap_ptr) {
 	    munmap(vmap_ptr, vmap_size);
 	}
-
-      
-      
       
 	vmap_base = new_vmap_base;
 	vmap_ptr = (unsigned char*) mmap64(NULL,   vmap_size,
